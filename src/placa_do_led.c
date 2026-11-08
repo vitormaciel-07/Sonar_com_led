@@ -85,7 +85,7 @@ gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO3);
                 ascender_branco();
             }
         
-            if(buffer>W)
+            if(buffer>14)
             {
                 apagar_led();
             }
