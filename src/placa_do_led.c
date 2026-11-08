@@ -51,36 +51,36 @@ gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO3);
         if ((ticks - start) > 1000 && (ticks - start) < 2000)
         {
             float buffer = usart_recv_blocking(USART2);
-            if(buffer <R)
+            if(buffer <=2)
             {
                 ascender_vermelho();
             }
 
-            if(buffer>R && buffer <V )
+            if(buffer>2 && buffer <=4 )
             {
                 ascender_roxo();
             }
 
-            if(buffer>V && buffer <A)
+            if(buffer>4 && buffer <=6)
             {
                 ascender_azul();
             }
 
-            if(buffer>A && buffer<C)
+            if(buffer>6 && buffer<=8)
             {
-                ascender_ciano;
+                ascender_ciano();
             }
 
-            if(buffer>C && buffer<G)
+            if(buffer>8 && buffer<=10)
             {
                 ascender_verde();
             }
-            if(buffer>G && buffer <Y)
+            if(buffer>10 && buffer <=12)
             {
                 ascender_amarelo();
             }
 
-            if(buffer>Y && buffer <W)
+            if(buffer>12 && buffer <=14)
             {
                 ascender_branco();
             }
