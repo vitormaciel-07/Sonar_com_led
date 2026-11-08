@@ -1,7 +1,7 @@
 #pragma once
 
 #define _LED_RED_ GPIO10
-#define _LED_BLUE_ GPIO09
+#define _LED_BLUE_ GPIO9
 #define _LED_GREEN_ GPIO11
 
 void setup_leds(void);
