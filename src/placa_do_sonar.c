@@ -19,7 +19,7 @@ void sys_tick_handler(void) { ticks++;
                               time++; }
 uint16_t estado;
 int main(void) {
-  setup_clock1000hz();
+  setup_clock1000000hz();
 
   rcc_periph_clock_enable(RCC_GPIOB);
   rcc_periph_clock_enable(RCC_GPIOA);

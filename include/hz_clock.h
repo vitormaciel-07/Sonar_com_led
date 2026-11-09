@@ -1,1 +1,1 @@
-void setup_clock1000hz(void);
+void setup_clock1000000hz(void);
