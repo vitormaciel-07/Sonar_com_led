@@ -45,10 +45,10 @@ int main(void) {
     gpio_set(GPIOB, TRIG);
    
    }
-   if(ticks - start > 20 && ticks-start < 4000){
+   if(ticks - start > 20 && ticks-start < 60000){
     gpio_clear(GPIOB, TRIG);
    }
-   if(ticks - start > 4000){
+   if(ticks - start > 60000){
     start = ticks;
    }
    if(gpio_get(GPIOB, ECHO) != 0){
