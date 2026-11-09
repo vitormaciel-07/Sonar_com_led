@@ -42,23 +42,15 @@ int main(void) {
   estado = gpio_get(GPIOB, ECHO);
     while(1){
 
-
-   if(  ticks - start > 0    && ticks-start < 20){
-
-    gpio_set(GPIOB, TRIG);
-   
-   }
-   if(ticks - start > 20 && ticks-start < 60000){
-    gpio_clear(GPIOB, TRIG);
-   }
-   if(ticks - start > 60000){
     start = ticks;
-   }
+   gpio_set(GPIOB, TRIG);
+   while(ticks - start < 20); 
+    gpio_clear(GPIOB, TRIG);
    while(gpio_get(GPIOB, ECHO) == 0);
    time = 0;
    while(gpio_get(GPIOB, ECHO) != 0);
     uint16_t distancia = (time * 0.01715);
     usart_send_blocking(USART1, distancia);
-
+   
 
 }}
