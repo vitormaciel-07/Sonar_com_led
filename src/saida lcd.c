@@ -87,23 +87,39 @@ void palavra(const char* texto)
 
 void numeroFloat(float val, int casasDecimais)
 {
-    int parteInteira = (int)val;
-    float fracao = val - parteInteira;
-    if (fracao < 0) fracao = -fracao;
-
-    // Calcula 10^casasDecimais
     int multiplicador = 1;
+
     for (int i = 0; i < casasDecimais; i++) {
         multiplicador *= 10;
     }
 
-    // +0.5f garante o arredondamento correto ao converter para int
+    // Trabalha com o módulo para preservar o sinal separadamente
+    int parteInteira = (int)val;
+    float fracao = val - parteInteira;
+
+    if (val < 0 && parteInteira == 0) {
+        fracao = -val;
+    } else if (fracao < 0) {
+        fracao = -fracao;
+    }
+
+    // Arredondamento
     int parteDecimal = (int)(fracao * multiplicador + 0.5f);
 
-    char buffer[17];
-    // O '*' em '%0*d' recebe 'casasDecimais' para ajustar os zeros dinamicamente
-    sprintf(buffer, "%d.%0*d", parteInteira, casasDecimais, parteDecimal);
-    
+    // Corrige o transporte para a parte inteira
+    if (parteDecimal >= multiplicador) {
+        parteInteira += (val < 0) ? -1 : 1;
+        parteDecimal = 0;
+    }
+
+    char buffer[32];
+
+    sprintf(buffer, "%s%d.%0*d",
+            (val < 0 && parteInteira == 0) ? "-" : "",
+            (parteInteira < 0) ? -parteInteira : parteInteira,
+            casasDecimais,
+            parteDecimal);
+
     palavra(buffer);
 }
 
@@ -140,7 +156,7 @@ int main(void)
     systick_counter_enable();
     systick_interrupt_enable();
 
-    float temperatura = 25.5;
+    float distancia = 25.5;
 
     iniciar_lcd();
     palavra("Distancia:");
@@ -149,7 +165,7 @@ int main(void)
     while (1) {
         // Loop principal
         lcd_set_cursor(1, 0); // Move para a segunda linha
-        numeroFloat(temperatura, 2);
+        numeroFloat(distancia, 2);
         usleep(200000);
     }
 }
