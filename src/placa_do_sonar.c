@@ -54,8 +54,9 @@ int main(void) {
    if(ticks - start > 60000){
     start = ticks;
    }
-   time = 0;
    while(gpio_get(GPIOB, ECHO) == 0);
+   time = 0;
+   while(gpio_get(GPIOB, ECHO) != 0);
     uint16_t distancia = (time * 0.01715);
     usart_send_blocking(USART1, distancia);
 
