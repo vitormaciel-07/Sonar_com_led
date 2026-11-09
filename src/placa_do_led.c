@@ -48,7 +48,7 @@ gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO3);
   {
         if ((ticks - start) > 1000 && (ticks - start) < 2000)
         {
-            float buffer = usart_recv_blocking(USART2);
+            uint16_t buffer = usart_recv_blocking(USART2);
             if(buffer <=2)
             {
                 ascender_vermelho();
