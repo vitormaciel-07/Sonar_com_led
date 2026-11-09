@@ -39,7 +39,6 @@ gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO3);
     usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
     usart_enable(USART2);
 
-  unsigned int now = 0;
   gpio_clear(GPIOA, GPIO9);
   gpio_set(GPIOA, GPIO10);
   gpio_set(GPIOA, GPIO11);
@@ -47,7 +46,6 @@ gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO3);
 
   while (1)
   {
-    now = ticks;
         if ((ticks - start) > 1000 && (ticks - start) < 2000)
         {
             float buffer = usart_recv_blocking(USART2);

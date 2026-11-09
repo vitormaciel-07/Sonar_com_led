@@ -1,4 +1,5 @@
 #pragma once
+#include <libopencm3/stm32/gpio.h>
 
 #define _LED_RED_ GPIO10
 #define _LED_BLUE_ GPIO9
