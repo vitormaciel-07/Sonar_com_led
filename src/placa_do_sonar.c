@@ -34,6 +34,9 @@ int main(void) {
   usart_set_mode(USART1, USART_MODE_TX_RX);
   usart_set_parity(USART1, USART_PARITY_NONE);
   usart_set_baudrate(USART1, 9600);
+  gpio_set_mode(
+    GPIOA,GPIO_MODE_OUTPUT_50_MHZ,GPIO_CNF_OUTPUT_ALTFN_PUSHPULL, GPIO9
+);
   usart_enable(USART1);
   int start =0 ;
   estado = gpio_get(GPIOB, ECHO);
@@ -51,16 +54,10 @@ int main(void) {
    if(ticks - start > 60000){
     start = ticks;
    }
-   if(gpio_get(GPIOB, ECHO) != 0){
-      time = 0;
-    }else{
-      if(time > 0){
-        uint16_t distancia = (time * 0.01715);
-        usart_send_blocking(USART1, distancia);
-      }
-    }
-
-
+   time = 0;
+   while(gpio_get(GPIOB, ECHO) == 0);
+    uint16_t distancia = (time * 0.01715);
+    usart_send_blocking(USART1, distancia);
 
 
 }}
